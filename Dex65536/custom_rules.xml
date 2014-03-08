@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="custom_rules">
+    <dirname property="custom_rules.basedir" file="${ant.file.custom_rules}"/>
+    <path id="pathtool.antlibs">
+        <pathelement path="${custom_rules.basedir}/pathtool.jar" />
+    </path>
+    <taskdef resource="anttasks.properties" classpathref="pathtool.antlibs"/>
+
+    <target name="-post-compile">
+        <!--
+        libs="libs/" means pack all .jar library into the secondary dex.
+        if you to pack specific .jar into the secondary dex, change it to
+        libs="/android-support-v4.jar,/10k-methods.jar"
+        -->
+        <pathtool
+            libs="libs/"
+            refid="project.all.jars.path"
+            excludeRefid="out.dex.jar.input.ref"
+            includeRefid="out.dex.jar.assets" />
+        <mkdir dir="${out.absolute.dir}/libs.apk"/>
+        <dex executable="${dx}"
+                output="${out.absolute.dir}/libs.apk/classes.dex"
+                dexedlibs="${out.absolute.dir}/libs.apk"
+                nolocals="true"
+                forceJumbo="false"
+                disableDexMerger="false">
+            <path refid="out.dex.jar.assets" />
+        </dex>
+        <zip destfile="${out.absolute.dir}/libs-unaligned.apk"
+            basedir="${out.absolute.dir}/libs.apk"
+            includes="classes.dex"
+            update="true"/>
+        <zipalign
+            executable="${zipalign}"
+            input="${out.absolute.dir}/libs-unaligned.apk"
+            output="${asset.absolute.dir}/libs.apk"
+            verbose="${verbose}" />
+    </target>
+
+    <target name="-post-package">
+        <delete file="${asset.absolute.dir}/libs.apk"/>
+    </target>
+</project>
