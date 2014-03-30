@@ -8,6 +8,7 @@ When you get this message, normally it is not because your project itself has to
 
 So the easy solution is to pack your .jar libraries in libs/ folder into a secondary .dex file and load that file before your application starts.
 
+NOTE: you can write code in eclipse, but you need to build/run in ant.
 
 ### Step1: build tools
 
@@ -94,12 +95,11 @@ If you don't have a custom Application class, register one in your AndroidManife
 
 Othersise you just need to copy dexTool() method into your own custom Application and call it after super.onCreate().
 
-### Step3: ant build
+### Step3: ant build and run
 
 Make sure you have ant installed.
 
 	cd /Dex65536
-	ant debug
-	adb install -r bin/MainActivity-debug.apk 
+	ant debug install run
 
 Your project should be compile and runnable. Good luck.
