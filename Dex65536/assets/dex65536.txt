@@ -1,0 +1,2 @@
+assets/libs.apk will be generate and package to your final apk file.
+https://github.com/mmin18/Dex65536
