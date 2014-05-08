@@ -32,8 +32,7 @@ public class App extends Application {
 		File dexDir = new File(getFilesDir(), "dlibs");
 		dexDir.mkdir();
 		File dexFile = new File(dexDir, "libs.apk");
-		File dexOpt = new File(dexDir, "opt");
-		dexOpt.mkdir();
+		File dexOpt = getCacheDir();
 		try {
 			InputStream ins = getAssets().open("libs.apk");
 			if (dexFile.length() != ins.available()) {
