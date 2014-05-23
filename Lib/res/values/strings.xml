@@ -1,0 +1,5 @@
+<resources>
+
+    <string name="hello">Hello, this is the string from android library project, just to check if the R.java works.</string>
+
+</resources>

@@ -9,6 +9,11 @@
         android:layout_height="wrap_content"
         android:text="@string/hint" />
 
+    <com.github.mmin18.dex65536.HelloTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp" />
+
     <TextView
         android:id="@+id/progress"
         android:layout_width="wrap_content"
